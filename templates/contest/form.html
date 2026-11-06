@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Конкурс мороженого
+{% endblock %}
+
+{% block content %}
+  {% with data=form.instance %}
+    {% if '/edit/' in request.path %}
+      <h2>Редактировать заявку {{ data.pk }}</h2>
+    {% elif '/delete/' in request.path %}
+      <h2>Удалить заявку {{ data.pk }}</h2>
+    {% else %}
+      <h2>Подать заявку</h2>
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      {% if not '/delete/' in request.path %}
+        <table>
+          {{ form.as_table }}
+        </table>
+        <input type="submit" value="Отправить заявку">
+      {% else %}
+        <p>{{ data.title }}</p>
+        <p>{{ data.price }}</p>
+        <p>{{ data.description }}</p>
+        <p>{{ data.comment }}</p>
+        <input type="submit" value="Удалить">
+      {% endif %}
+    </form>
+
+    {% if form.is_valid and '/delete/' not in request.path %}
+      <p>ID новой записи в БД: {{ data.id }}</p>
+    {% endif %}
+  {% endwith %}
+{% endblock %}

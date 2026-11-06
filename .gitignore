@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Виртуальное окружение
+venv/
+env/
+
+# Django
+db.sqlite3
+*.log
+media/
+static/
+
+# VS Code
+.vscode/
+
+# Системные
+.DS_Store
+Thumbs.db
